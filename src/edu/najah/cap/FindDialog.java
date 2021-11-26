@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-@SuppressWarnings("serial")
 public class FindDialog extends JDialog implements ActionListener, KeyListener {
 
 	Editor parent;
