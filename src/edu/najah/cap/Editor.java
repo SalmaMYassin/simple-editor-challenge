@@ -118,7 +118,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
 		edit.add(paste);
 		paste.addActionListener(this);
-		//move
+		//move 
 		/*
 		JMenuItem move = new JMenuItem("Move");
 		move.setMnemonic('M');
@@ -172,8 +172,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 				TP.paste();
 				break;
 			case FIND:
-				FindDialog find = new FindDialog(this, true);
-				find.showDialog();
+				new FindDialog(this, true).showDialog();
 				break;
 		}
 	}
