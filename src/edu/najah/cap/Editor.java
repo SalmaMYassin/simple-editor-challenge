@@ -70,30 +70,21 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		JMenu file = new JMenu("File");
 		file.setMnemonic('F');
 		menu.add(file);
+
 		JMenuItem n = new JMenuItem(NEW);
-		n.setMnemonic('N');
-		n.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
-		n.addActionListener(this);
-		file.add(n);
+		setFileMenuItems(file, n, 'N', KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+
 		JMenuItem open = new JMenuItem(OPEN);
-		file.add(open);
-		open.addActionListener(this);
-		open.setMnemonic('O');
-		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
+		setFileMenuItems(file, open, 'O', KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
+
 		JMenuItem save = new JMenuItem(SAVE);
-		file.add(save);
-		save.setMnemonic('S');
-		save.addActionListener(this);
-		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+		setFileMenuItems(file, save, 'S', KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+
 		JMenuItem saveAs = new JMenuItem(SAVE_AS);
-		saveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
-		file.add(saveAs);
-		saveAs.addActionListener(this);
+		setFileMenuItems(file, saveAs, 'S', KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
+
 		JMenuItem quit = new JMenuItem(QUIT);
-		file.add(quit);
-		quit.addActionListener(this);
-		quit.setMnemonic('Q');
-		quit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
+		setFileMenuItems(file, quit, 'Q', KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
 	}
 
 	private void buildEditMenu() {
@@ -102,42 +93,35 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		edit.setMnemonic('E');
 		// cut
 		JMenuItem cut = new JMenuItem(CUT);
-		cut.addActionListener(this);
-		cut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
-		cut.setMnemonic('T');
-		edit.add(cut);
+		setFileMenuItems(edit, cut, 'T', KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
+
 		// copy
 		JMenuItem copy = new JMenuItem(COPY);
-		copy.addActionListener(this);
-		copy.setMnemonic('C');
-		copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
-		edit.add(copy);
+		setFileMenuItems(edit, copy, 'C', KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
+
 		// paste
 		JMenuItem paste = new JMenuItem(PASTE);
-		paste.setMnemonic('P');
-		paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
-		edit.add(paste);
-		paste.addActionListener(this);
+		setFileMenuItems(edit, paste, 'P', KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
+
 		//move 
 		/*
 		JMenuItem move = new JMenuItem("Move");
-		move.setMnemonic('M');
-		move.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
-		edit.add(move);
-		move.addActionListener(this);
+		setFileMenuItems(edit, move, 'M',KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
 		*/
 		// find
 		JMenuItem find = new JMenuItem(FIND);
-		find.setMnemonic('F');
-		find.addActionListener(this);
-		edit.add(find);
-		find.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
+		setFileMenuItems(edit, find, 'F', KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
+
 		// select all
 		JMenuItem selectAll = new JMenuItem(SELECT_ALL);
-		selectAll.setMnemonic('A');
-		selectAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
-		selectAll.addActionListener(this);
-		edit.add(selectAll);
+		setFileMenuItems(edit, selectAll, 'A', KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
+	}
+
+	private void setFileMenuItems(JMenu file, JMenuItem menuItem, char mnemonic, KeyStroke keyStroke){
+		menuItem.setMnemonic(mnemonic);
+		menuItem.setAccelerator(keyStroke);
+		menuItem.addActionListener(this);
+		file.add(menuItem);
 	}
 
 	@Override
