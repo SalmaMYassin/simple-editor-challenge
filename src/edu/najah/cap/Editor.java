@@ -154,13 +154,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 				saveFile();
 				break;
 			case NEW:
-				//Save File
-				saveFile();
-				//New file
-				file = null;
-				TP.setText("");
-				changed = false;
-				setTitle("Editor");
+				newFile();
 				break;
 			case SAVE_AS:
 				saveAs(SAVE_AS);
@@ -184,6 +178,16 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		}
 	}
 
+	private void newFile(){
+		//Save File
+		saveFile();
+		//New file
+		file = null;
+		TP.setText("");
+		changed = false;
+		setTitle("Editor");
+	}
+
 	private void saveFile(){
 		int ans = 0;
 		if (changed) {
@@ -195,19 +199,23 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			if (file == null) {
 				saveAs(SAVE);
 			} else {
-				String text = TP.getText();
-				System.out.println(text);
-				try (PrintWriter writer = new PrintWriter(file)){
-					if (!file.canWrite())
-						throw new Exception("Cannot write file!");
-					writer.write(text);
-					changed = false;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				writeFile();
 			}
 		}
 	}
+
+	private void writeFile(){
+		String text = TP.getText();
+		try (PrintWriter writer = new PrintWriter(file)){
+			if (!file.canWrite())
+				throw new Exception("Cannot write file!");
+			writer.write(text);
+			changed = false;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	private void loadFile() {
 		JFileChooser dialog = new JFileChooser(System.getProperty("user.home"));
 		dialog.setMultiSelectionEnabled(false);
